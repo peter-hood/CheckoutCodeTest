@@ -1,0 +1,15 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+obj/
+Debug/
+Release/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
