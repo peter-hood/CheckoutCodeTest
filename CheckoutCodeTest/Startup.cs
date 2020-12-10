@@ -1,4 +1,5 @@
 using CheckoutCodeTest.AcquiringBank;
+using CheckoutCodeTest.DataStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +26,9 @@ namespace CheckoutCodeTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IAcquiringBank, MockBank>();
+            services.AddSingleton<IPaymentStorage, InMemoryDictionaryPaymentStore>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen(generationOptions =>
             {
