@@ -1,7 +1,7 @@
-﻿using CheckoutCodeTest.Models;
+﻿using CheckoutAPI.Models;
 using System;
 
-namespace CheckoutCodeTest.AcquiringBank
+namespace CheckoutAPI.AcquiringBank
 {
     public interface IAcquiringBank
     {

@@ -1,5 +1,5 @@
-using CheckoutCodeTest.AcquiringBank;
-using CheckoutCodeTest.DataStorage;
+using CheckoutAPI.AcquiringBank;
+using CheckoutAPI.DataStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +11,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace CheckoutCodeTest
+namespace CheckoutAPI
 {
     public class Startup
     {

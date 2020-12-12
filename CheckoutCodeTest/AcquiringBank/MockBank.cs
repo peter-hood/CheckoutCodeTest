@@ -1,6 +1,6 @@
-﻿using CheckoutCodeTest.Models;
+﻿using CheckoutAPI.Models;
 
-namespace CheckoutCodeTest.AcquiringBank
+namespace CheckoutAPI.AcquiringBank
 {
     public class MockBank : IAcquiringBank
     {
@@ -8,7 +8,7 @@ namespace CheckoutCodeTest.AcquiringBank
 
         public BankResponseDto PaymentIsApproved(PaymentRequestDto paymentRequestDto)
         {
-            return new BankResponseDto { id = uniqueId++, status = true };
+            return new BankResponseDto(uniqueId++,  true);
         }
     }
 }

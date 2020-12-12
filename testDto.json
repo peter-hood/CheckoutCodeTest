@@ -1,0 +1,7 @@
+{
+  cardNumber: 1234567890123456,
+  expiryDate: "01/01/2020",
+  currency: "GBP",
+  amount: 12.3,
+  cvv: 123
+}

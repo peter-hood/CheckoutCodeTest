@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CheckoutCodeTest.Models;
+using CheckoutAPI.Models;
 
-namespace CheckoutCodeTest.DataStorage
+namespace CheckoutAPI.DataStorage
 {
     public class InMemoryDictionaryPaymentStore : IPaymentStorage
     {
-        private Dictionary<int, Tuple<PaymentRequestDto, bool>> inMemoryStore;
+        private Dictionary<int, PaymentStorageObject> inMemoryStore = new Dictionary<int, PaymentStorageObject>();
 
-        public void Retrieve()
+        public PaymentStorageObject Retrieve(int id)
         {
-            throw new NotImplementedException();
+            return inMemoryStore[id];
         }
 
-        public void Store(int id, PaymentRequestDto paymentRequest, bool approved)
+        public void Store(int id, PaymentStorageObject paymentObject)
         {
-            inMemoryStore.Add(id, new Tuple<PaymentRequestDto, bool>(paymentRequest, approved));
+            inMemoryStore.Add(id, paymentObject);
         }
     }
 }

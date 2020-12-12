@@ -1,11 +1,8 @@
-﻿
-using CheckoutCodeTest.Models;
-
-namespace CheckoutCodeTest.DataStorage
+﻿namespace CheckoutAPI.DataStorage
 {
     public interface IPaymentStorage
     {
-        public void Store(int id, PaymentRequestDto paymentRequest, bool approved);
-        public void Retrieve();
+        public void Store(int id, PaymentStorageObject paymentDetails);
+        public PaymentStorageObject Retrieve(int id);
     }
 }
