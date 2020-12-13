@@ -28,11 +28,14 @@ namespace CheckoutAPI.Controllers
         /// <returns>
         ///     On succesful payment: a 200 OK response with body <see cref="PaymentResponseDto"/>.
         ///     On failed payment: returns 401 Unauthorized response.
+        ///     On invalid request: returns 400 Bad Request response.
+        ///     On failure with acquiring bank: returns 500 Internal Server Error response.
         /// </returns>
         [HttpPost]
         [ProducesResponseType(typeof(PaymentResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> MakePayment(PaymentRequestDto paymentRequest)
         {
             IActionResult result;
