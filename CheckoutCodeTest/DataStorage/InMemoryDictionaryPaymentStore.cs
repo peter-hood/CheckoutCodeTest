@@ -10,7 +10,11 @@ namespace CheckoutAPI.DataStorage
 
         public PaymentStorageObject Retrieve(int id)
         {
-            return inMemoryStore[id];
+            if (inMemoryStore.ContainsKey(id)) {
+                return inMemoryStore[id];
+            } else {
+                return null;
+            }
         }
 
         public void Store(int id, PaymentStorageObject paymentObject)

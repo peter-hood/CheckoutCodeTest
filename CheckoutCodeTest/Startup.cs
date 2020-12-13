@@ -27,6 +27,7 @@ namespace CheckoutAPI
         {
             services.AddSingleton<IAcquiringBank, MockBank>();
             services.AddSingleton<IPaymentStorage, InMemoryDictionaryPaymentStore>();
+            services.AddSingleton<IPaymentRequestValidator, PaymentRequestValidator>();
 
             services.AddControllers().AddNewtonsoftJson();
 
