@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 using System;
+using System.Data;
 using System.IO;
 using System.Reflection;
 
@@ -22,12 +24,17 @@ namespace CheckoutAPI
 
         public IConfiguration Configuration { get; }
 
+        private string connString = "Host=localhost;Port=5432;Username=postgres;Password=mysecretpassword;Database=postgres";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IAcquiringBank, MockBank>();
-            services.AddSingleton<IPaymentStorage, InMemoryDictionaryPaymentStore>();
+            //services.AddSingleton<IPaymentStorage, InMemoryDictionaryPaymentStore>();
             services.AddSingleton<IPaymentRequestValidator, PaymentRequestValidator>();
+
+            services.AddSingleton<IDbConnection, NpgsqlConnection>(x => new NpgsqlConnection(connString));
+            services.AddSingleton<IPaymentStorage, PostgresStorage>();
 
             services.AddControllers().AddNewtonsoftJson();
 
