@@ -50,6 +50,7 @@ namespace CheckoutAPI.DataStorage
 
         public void Store(int id, PaymentStorageObject paymentDetails)
         {
+            CreateIfNotExist();
             string commandText = $@"INSERT INTO {tableName} (id, maskedCardNumber, hashedCardNumber, expiryDate, amount, currency, transactionTime, approved)
 						VALUES ('{id}', '{paymentDetails.maskedCardNumber}', '{paymentDetails.hashedCardNumber}', '{(NpgsqlTypes.NpgsqlDateTime)paymentDetails.expiryDate}', 
                         '{paymentDetails.amount}', '{paymentDetails.currency}', '{(NpgsqlTypes.NpgsqlDateTime)paymentDetails.transactionTime}', '{paymentDetails.approved}')";
@@ -61,6 +62,33 @@ namespace CheckoutAPI.DataStorage
                     dbCommand.CommandText = commandText;
                     dbCommand.ExecuteNonQuery();
                 } finally {
+                    CloseConnection(dbConnection);
+                }
+            }
+        }
+
+        private void CreateIfNotExist()
+        {
+            string commandText = @"CREATE TABLE IF NOT EXISTS public.paymentstore(
+                                    id int4 NULL,
+                                    maskedcardnumber varchar NULL,
+                                    hashedcardnumber int4 NULL,
+                                    amount money NULL,
+                                    currency varchar(3) NULL,
+	                                approved bool NULL,
+                                    expirydate timestamptz(0) NULL,
+	                                transactiontime timestamptz(0) NULL);";
+            
+            OpenConnection(dbConnection);
+            using (IDbCommand dbCommand = dbConnection.CreateCommand())
+            {
+                try
+                {
+                    dbCommand.CommandText = commandText;
+                    dbCommand.ExecuteNonQuery();
+                }
+                finally
+                {
                     CloseConnection(dbConnection);
                 }
             }
